@@ -1,0 +1,41 @@
+managed implementation in class zbp_r_rap_request unique;
+strict ( 2 );
+
+define behavior for ZR_RAP_Request alias Request
+persistent table zrap_request
+lock master
+authorization master ( global )
+etag master LocalLastChangedAt
+{
+  create;
+  update;
+  delete;
+
+  field ( numbering : managed, readonly ) RequestUUID;
+
+  field ( readonly )
+    CreatedBy,
+    CreatedAt,
+    LastChangedBy,
+    LastChangedAt,
+    LocalLastChangedAt;
+
+  field ( mandatory )
+    Title,
+    Priority;
+
+  mapping for zrap_request
+  {
+    RequestUUID       = request_uuid;
+    RequestID         = request_id;
+    Title             = title;
+    Description       = description;
+    Priority          = priority;
+    Status            = status;
+    CreatedBy         = created_by;
+    CreatedAt         = created_at;
+    LastChangedBy     = last_changed_by;
+    LastChangedAt     = last_changed_at;
+    LocalLastChangedAt = local_last_changed_at;
+  }
+}
